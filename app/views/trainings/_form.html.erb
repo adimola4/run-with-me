@@ -1,0 +1,52 @@
+<%= form_with(model: training, local: true) do |form| %>
+  <% if training.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(training.errors.count, "error") %> prohibited this training from being saved:</h2>
+
+      <ul>
+        <% training.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.datetime_select :date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :duration %>
+    <%= form.text_field :duration %>
+  </div>
+
+  <div class="field">
+    <%= form.label :participants %>
+    <%= form.number_field :participants %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+   <div class="field">
+    <%= form.label :Location %>
+    <%= form.text_field :Location %>
+  </div>
+
+   <div class="field">
+    <%= form.label :published %>
+    <%= form.check_box  :published %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
