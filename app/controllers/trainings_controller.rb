@@ -5,7 +5,7 @@ class TrainingsController < ApplicationController
   # GET /trainings
   # GET /trainings.json
   def index
-    @trainings = Training.new
+    @training = Training.new
     public_trainings
   end
 
@@ -28,11 +28,11 @@ class TrainingsController < ApplicationController
   # POST /trainings.json
   def create
     @user=current_user
-    @training =user.trainings.new(training_params)
+    @training =@user.trainings.new(training_params)
     @training.status = 0;
     respond_to do |format|
       if @training.save
-        format.html { redirect_to @trainings, notice: 'Training was successfully created.' }
+        format.html { redirect_to trainings_path, notice: 'Training was successfully created.' }
         format.json { render :show, status: :created, location: @training }
       else
         format.html { render :new }

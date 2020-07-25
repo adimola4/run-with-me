@@ -5,22 +5,30 @@
   </button>
 
   <div class="navbar-collapse offcanvas-collapse open" id="navbarsExampleDefault">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav mr-auto ">
       <li class="nav-item">
         <%= link_to "Home", root_path, class: "nav-link"%>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
-        <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
+      <li class="nav-item">
+        <%= link_to "About", root_path, class: "nav-link"%>
+      </li>
+      <li>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="ZipCode" aria-label="Search">
+        <a class="btn btn-outline-success my-2 my-sm-0" type="submit">Search partner</a>
+      </form>
       </li>
       <% if current_user %>
-         <%= image_tag current_user.gravatar_url, :class => "gravatar" %>
-        <li class="nav-item">
-          <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "nav-link"%>
+          <li class="stick-right">
+          
+         <%= image_tag current_user.gravatar_url, :class => "gravatar " %>
+         <li class="nav-item dropdown mr-auto ">
+        <a class="nav-link dropdown-toggle " href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=current_user.name%></a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <%= link_to "Profile", edit_user_registration_path, class: "dropdown-item"%>
+          <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "dropdown-item"%>
+        </div>
+        </li>
         </li>
       <% else %>
         <li class="nav-item">
@@ -31,9 +39,6 @@
         </li>
         <% end %>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+   
   </div>
 </nav>

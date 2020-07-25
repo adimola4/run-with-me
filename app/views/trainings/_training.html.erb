@@ -1,0 +1,29 @@
+<li class="training">
+  <div class="card">
+    <img class="card-img" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.active.com%2Frunning%2Farticles%2Fhow-to-introduce-your-dog-to-running&psig=AOvVaw14JJdgCAJFLQSSLQo-7eiw&ust=1595751402097000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKjWvL375-oCFQAAAAAdAAAAABAD" alt="Bologna">
+    <div class="card-img-overlay">
+    <%= link_to training.user.name, user_path(training.user), class: 'btn btn-light btn-sm' %>
+    </div>
+    <div class="card-body">
+    <h4 class="card-title"> <%= @training.title%></h4>
+    <small class="text-muted cat">
+      <i class="far fa-clock text-info"></i> <%= training.date.strftime("%Y/%m/%d")  %>
+      <i class="fas fa-users text-info"></i> <%= training.participants %>
+    </small>
+    <p> Location: <%= training.Location %></p>
+    <p> Duration: <%= training.duration %></p>
+    <%= link_to "Join Me 🏃🏽‍♀️", training_path(training), class: 'btn btn-info btn-sm' %>
+    <%# <%= like_or_dislike_btn(post) %> %>
+    </div>
+    <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
+        <div class="views">last modified: <%= training.created_at.strftime("%Y/%m/%d") %> 
+    </div>
+    <div class="stats">
+      <i class="far fa-eye"></i> 1347
+      <i class="far fa-comment"></i> 12
+    </div>
+  </div>
+</div>
+</li>
+      
+      
