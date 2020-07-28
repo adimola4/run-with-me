@@ -1,0 +1,28 @@
+<div class="col-12 col-md-6">
+    <%# add emoji %>
+  <div class="card card1 " >
+    <%=image_tag("/assets/images/avatar.jpg",class: "card-img1 rounded-circle", size: "16x10", alt: "avatar")%>
+    
+    <div class="card-img">
+        <%= link_to(training.user, html_options = {class:'name-btn   btn-sm '}) do%>
+        <strong><%= training.user.name %></strong>
+          <%end%>
+    <small class="text-muted cat">
+      <i class="far fa-clock text-info"></i> <%= training.date.strftime("%Y/%m/%d")  %>
+      <i class="fas fa-users text-info"></i> <%= training.participants %>
+    </small>
+    </div>
+    <div class="card-body">
+    <h4 class="card-title">What we gonna do? <%= training.title%></h4>
+    <p> Where? <%= training.Location %></p>
+    <p> Duration: <%= training.duration %></p>
+    </div>
+    <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
+        <div class="views">last modified: <%= training.created_at.strftime("%Y/%m/%d") %> 
+    </div>
+   
+  </div>
+</div>
+</div>
+      
+      

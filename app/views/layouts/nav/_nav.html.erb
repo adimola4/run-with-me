@@ -1,16 +1,16 @@
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-  <a class="navbar-brand mr-auto mr-lg-0" href="#">🏃🏽 Run With Me 🏃🏽‍♀️</a>
-  <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+<nav class="navbar navbar-expand-lg fixed-top  bg-h-0">
+ <%= link_to "🏃🏽 Run With Me 🏃🏽‍♀️", root_path, class: "navbar-brand mr-auto mr-lg-0"%>
+  <button class="navbar-toggler p-0 border-0 nav-ham" type="button" data-toggle="offcanvas">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="navbar-collapse offcanvas-collapse open" id="navbarsExampleDefault">
+  <div class="navbar-collapse offcanvas-collapse open text[#ff5e6c]" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto ">
       <li class="nav-item">
-        <%= link_to "Home", root_path, class: "nav-link"%>
+        <%= link_to "Home", root_path, class: "nav-link coral-pink-text"%>
       </li>
       <li class="nav-item">
-        <%= link_to "About", root_path, class: "nav-link"%>
+        <%= link_to "About", about_path, class: "nav-link text[#ff5e6c]"%>
       </li>
       <li>
       <form class="form-inline my-2 my-lg-0">
@@ -23,9 +23,12 @@
           
          <%= image_tag current_user.gravatar_url, :class => "gravatar " %>
          <li class="nav-item dropdown mr-auto ">
-        <a class="nav-link dropdown-toggle " href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=current_user.name%></a>
+        <a class="nav-link dropdown-toggle text[#ff5e6c]" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=current_user.name%></a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <%= link_to "Profile", edit_user_registration_path, class: "dropdown-item"%>
+        <%= link_to(current_user, html_options = {class:'dropdown-item'}) do%>
+              <strong>Profile</strong>
+          <%end%>
+          <%= link_to "Edit Profile", edit_user_registration_path, class: "dropdown-item"%>
           <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "dropdown-item"%>
         </div>
         </li>

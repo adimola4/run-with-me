@@ -1,13 +1,18 @@
-<section>
-<%= render 'form', training: @training %>
+<section class="container">
+<div class="row align-items-start">
+<h1>Add new training<h1>
 
-<article class="">
+<%= render 'form', training: @training %>
+</div>
+<article class="row align-items-center">
   <h3>
     Recent trainings
   </h3>
-  <ul class="trainigs">
-    <%= render @public_trainings %>
-  </ul>
+ 
+    <div class="row ">
+        <%= render @public_trainings %>
+    </div>
+ 
 </article>
 
 </section>

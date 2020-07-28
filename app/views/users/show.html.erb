@@ -1,7 +1,25 @@
-<section class="form-auth text-canter container col-4">
-    <h2><%= "users/show" %></h2>
-
-
-
-
+<section class="text-canter container-fluid px-0 show-user">
+    <div class="row1 ">
+       <%= render 'user', user: @user %>
+    </div>
+    <% if current_user %>
+        <hr/>
+        <div class="row1">
+        <div class="col-md-12">
+                <h1>Upcoming :</h1>
+                    <div class="row ">
+                    <%= render 'upcoming' %>
+                    </div>
+            </div>
+        </div>
+    <%end%>
+    <hr/>
+    <div class="row1">
+    <div class="col-md-12">
+            <h1>Last training :</h1>
+                <div class="row ">
+                <%= render @trainings %>
+                </div>
+        </div>
+    </div>
 </section>

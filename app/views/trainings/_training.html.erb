@@ -1,29 +1,44 @@
-<li class="training">
-  <div class="card">
-    <img class="card-img" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.active.com%2Frunning%2Farticles%2Fhow-to-introduce-your-dog-to-running&psig=AOvVaw14JJdgCAJFLQSSLQo-7eiw&ust=1595751402097000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKjWvL375-oCFQAAAAAdAAAAABAD" alt="Bologna">
-    <div class="card-img-overlay">
-    <%= link_to training.user.name, user_path(training.user), class: 'btn btn-light btn-sm' %>
-    </div>
-    <div class="card-body">
-    <h4 class="card-title"> <%= @training.title%></h4>
+<div class="col-12 col-md-6">
+  <div class="card card1" >
+    <%=image_tag("/assets/images/avatar.jpg",class: "card-img1 rounded-circle", size: "16x10", alt: "avatar")%>
+    <div class="card-img">
+        <%= link_to(training.user, html_options = {class:'name-btn   btn-sm '}) do%>
+        <strong><%= training.user.name %></strong>
+          <%end%>
     <small class="text-muted cat">
       <i class="far fa-clock text-info"></i> <%= training.date.strftime("%Y/%m/%d")  %>
       <i class="fas fa-users text-info"></i> <%= training.participants %>
     </small>
-    <p> Location: <%= training.Location %></p>
+    </div>
+    <div class="card-body">
+    <h4 class="card-title">What we gonna do? <%= training.title%></h4>
+    <p> Where? <%= training.Location %></p>
     <p> Duration: <%= training.duration %></p>
-    <%= link_to "Join Me 🏃🏽‍♀️", training_path(training), class: 'btn btn-info btn-sm' %>
-    <%# <%= like_or_dislike_btn(post) %> %>
-    </div>
-    <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
-        <div class="views">last modified: <%= training.created_at.strftime("%Y/%m/%d") %> 
-    </div>
-    <div class="stats">
-      <i class="far fa-eye"></i> 1347
-      <i class="far fa-comment"></i> 12
-    </div>
+    
+    
+
+    <% date_diff = Date.current() - Date.parse(training.date.to_s())%>
+    <% if date_diff < 0 %>
+
+        <%= link_to "Join Me 🏃🏽‍♀️", training_path(training), class: 'btn  btn-sm justify-content-center d-flex' %>
+        <%# <%= like_or_dislike_btn(post) %> 
+        </div>
+        <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
+            <div class="views">last modified: <%= training.created_at.strftime("%Y/%m/%d") %> 
+        </div>
+        <div class="stats cat">
+          <i class="far fa-eye"></i> 1347
+          <i class="far fa-comment"></i> 12
+        </div>
+    <%else%>
+      <div><strong>
+      done
+        ✅   ✅   ✅</strong> </div>
+
+    <% end%>
+    
   </div>
 </div>
-</li>
+</div>
       
       

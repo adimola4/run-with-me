@@ -1,47 +1,47 @@
 <%= form_with(model: training, local: true) do |form| %>
-  <% if training.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(training.errors.count, "error") %> prohibited this training from being saved:</h2>
-
-      <ul>
-        <% training.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<div class="row">
+    <% if training.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(training.errors.count, "error") %> prohibited this training from being saved:</h2>
+        <ul>
+          <% training.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+        <div class="col-sm-12 col-md-4 form-group">
+          <%= form.label :title %>
+          <%= form.text_field :title , class:"form-control", placeholder:"running 5km..." %>
+        </div>
+        <div class="col-sm-12 col-md-4 form-group">
+         <%= form.label :participants %>
+         <%= form.number_field :participants, class:"form-control", placeholder:"how much partners?" %>
+        </div>
+   
+        <div class="col-sm-12 col-md-4 form-group">
+              <%= form.label :date %>
+              <%= form.text_field :date, id:"input", width: 250%>
+              <script>
+                  $('#input').datetimepicker({ footer: true, modal: true });
+              </script>
+        </div>
+        <div class="col-sm-12 col-md-4 form-group">
+              <%= form.label :duration %>
+              <%= form.text_field :duration, class:"form-control" %>
+        </div>
+    
+        <div class="col-sm-12 col-md-4 form-group">
+            <%= form.label :Location %>
+            <%= form.text_field :Location, class:"form-control", placeholder:"11 name st, city, state" %>
+        </div>
+        <div class="col-sm-12 col-md-4 form-group custom-control custom-checkbox">
+            <%= form.check_box  :published, class:"custom-control-input" %>
+            <%= form.label :published, class:"custom-control-label" %>
+        </div>
+   
+  </div>
+   <div class="actions float-right">
+      <%= form.submit "Add Training", class:"btn btn-info"%>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :date %>
-    <%= form.datetime_select :date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :duration %>
-    <%= form.text_field :duration %>
-  </div>
-
-  <div class="field">
-    <%= form.label :participants %>
-    <%= form.number_field :participants %>
-  </div>
-
-   <div class="field">
-    <%= form.label :Location %>
-    <%= form.text_field :Location %>
-  </div>
-
-   <div class="field">
-    <%= form.label :published %>
-    <%= form.check_box  :published %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>

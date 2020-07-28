@@ -12,6 +12,7 @@ class TrainingsController < ApplicationController
   # GET /trainings/1
   # GET /trainings/1.json
   def show
+    @training = Training.find(params[:id])
   end
 
   # GET /trainings/new
@@ -22,6 +23,8 @@ class TrainingsController < ApplicationController
 
   # GET /trainings/1/edit
   def edit
+    @training = Training.find(params[:id])
+
   end
 
   # POST /trainings
@@ -44,7 +47,12 @@ class TrainingsController < ApplicationController
   # PATCH/PUT /trainings/1
   # PATCH/PUT /trainings/1.json
   def update
-    respond_to do |format|
+    @user=current_user
+    @training =@user.trainings.find(params[:id])
+    p "dasdadasdadasdasd"
+    p @training
+    respond_to do |format| 
+      if @training
       if @training.update(training_params)
         format.html { redirect_to @training, notice: 'Training was successfully updated.' }
         format.json { render :show, status: :ok, location: @training }
@@ -52,6 +60,7 @@ class TrainingsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @training.errors, status: :unprocessable_entity }
       end
+    end
     end
   end
 
