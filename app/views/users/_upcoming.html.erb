@@ -1,44 +1,46 @@
-<table class="table table-bordered upcoming-table">
+<table class="table table-bordered table-sm upcoming-table">
   <thead>
     <tr>
       <th scope="col">Date</th>
-      <th scope="col">User Name</th>
-      <th scope="col">Location</th>
       <th scope="col">Title</th>
+      <th scope="col">Location</th>
       <th scope="col"></th>
      </tr>
   </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Bootstrap 4 CDN and Starter Template</td>
-      <td>Cristina</td>
-      <td>913</td>
-      <td>
-         <button type="button" class="btn btn-success"  data-toggle="tooltip" data-placement="top" title="More details/Edit"><i class="fas fa-edit"></i></button>
-         <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="right" title="Remove"><i class="far fa-trash-alt"></i></button>
-   
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Bootstrap Grid 4 Tutorial and Examples</td>
-      <td>Cristina</td>
-      <td>1.434</td>
-      <td>
-         <button type="button" class="btn btn-success"  data-toggle="tooltip" data-placement="top" title="More details/Edit"><i class="fas fa-edit"></i></button>
-        <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="right" title="Remove"><i class="far fa-trash-alt"></i></button>
-   </td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Bootstrap Flexbox Tutorial and Examples</td>
-      <td>Cristina</td>
-      <td>1.877</td>
-      <td>
-        <button type="button" class="btn btn-success"  data-toggle="tooltip" data-placement="top" title="More details/Edit"><i class="fas fa-edit"></i></button>
-        <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="right" title="Remove"><i class="far fa-trash-alt"></i></button>
-      </td>
-    </tr>
+  <tbody class="table_body">
+      <%  @upcoming_tranings.each do |training| %>
+            <tr>
+
+            <th scope="row"> <%= training[0].date.strftime("%m/%d/%Y")%></th>
+            
+              <td>
+                <%= training[0].title%>
+              </td>
+              <td>
+                <%= create_google_map_link(training[0].location)%>
+              </td>
+              <% if current_user == training[0].user_id %>
+              <td>
+              <%#לשנות את זה לפנוקציה כך שאני לא יכול לערוך אימון של מישהו אחר%>
+                <%= link_to ' <button type="button" class="btn btn-success"  data-toggle="tooltip" data-placement="top" title="More details/Edit"><i class="fas fa-edit"></i></button>'.html_safe, edit_training_path(training[0].id)%> 
+              </td>
+              <td>
+               <%= link_to '<i class="far fa-trash-alt"></i>'.html_safe , training_path(training),
+                  method: :delete,
+                  class: "btn btn-danger",
+                  data: { confirm: 'Are you sure?' } %></td>
+              <%else%>
+              <td>
+                <%= link_to ' <button type="button" class="btn btn-success"  data-toggle="tooltip" data-placement="top" title="More details"><i class="fas fa-edit"></i></button>'.html_safe, training_path(training[0].id)%> 
+              </td>
+              <%#<td>
+              <%# <%= link_to '<i class="far fa-trash-alt"></i>'.html_safe , training_partner_path(training),
+                 <%# method: :delete,
+                  <%#class: "btn btn-danger",
+                 <%# data: { confirm: 'Are you sure?' } %></td>
+              <%end%>
+              
+            </tr>
+          <% end %>
   </tbody>
 </table>

@@ -1,6 +1,17 @@
-<%= form_with(model: training, local: true) do |form| %>
-<div class="row">
-    <% if training.errors.any? %>
+
+<div class=" mx-auto multistep-card">
+      <h2 class="multistep-card-title">Creat new training</h2>
+      <ul id="progressbar">
+          <li class="active">Basic info</li>
+          <li>Date % Location</li>
+          <li>More Details</li>
+          <li>Review</li>
+      </ul>
+      
+    </div>
+    <div class="form-outer">
+    <%= form_with(model: training, local: true, id:"newtraining") do |form| %>
+      <% if training.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(training.errors.count, "error") %> prohibited this training from being saved:</h2>
         <ul>
@@ -8,40 +19,160 @@
             <li><%= message %></li>
           <% end %>
         </ul>
-      </div>
-    <% end %>
-        <div class="col-sm-12 col-md-4 form-group">
-          <%= form.label :title %>
-          <%= form.text_field :title , class:"form-control", placeholder:"running 5km..." %>
         </div>
-        <div class="col-sm-12 col-md-4 form-group">
-         <%= form.label :participants %>
-         <%= form.number_field :participants, class:"form-control", placeholder:"how much partners?" %>
-        </div>
-   
-        <div class="col-sm-12 col-md-4 form-group">
-              <%= form.label :date %>
-              <%= form.text_field :date, id:"input", width: 250%>
+      <% end %>
+          <fieldset class="step slide-step mx-auto fieldset">
+              <div class="step-card-title">Basic Info:</div>
+              <div class="form-group training-group">
+                  <%= form.label :title, class:"label"%>
+                  <%= form.text_field :title , class:"form-control", placeholder:"running 5km..." %>
+              </div>
+              <div class="form-group training-group">
+                  <%= form.label :training_type, class:"label" %>
+                  <br/>
+                  <%= form.select(:training_type,[['Running', 1], ['Walkd', 2],['Strength',3]],class:"form-control") %>
+              </div>
+              <div class="form-group training-group">
+                  <%= form.label :participants, class:"label" %>
+                  <%= form.number_field :participants, class:"form-control", placeholder:"how much partners?" %>
+              </div>
+               <input type="button" name="next" class="btn btn-info action-button next" value="Next"/>
+          </fieldset>
+          <fieldset class="step mx-auto ">
+            <div class="step-card-title">time & location</div>
+            <div class="form-group training-group">
+              <%= form.label :date, class:"label" %>
+              <%= form.text_field :date, id:"training_date", width: 160%>
               <script>
-                  $('#input').datetimepicker({ footer: true, modal: true });
+                  $('#training_date').datetimepicker({ footer: true, modal: true });
               </script>
-        </div>
-        <div class="col-sm-12 col-md-4 form-group">
-              <%= form.label :duration %>
-              <%= form.text_field :duration, class:"form-control" %>
-        </div>
-    
-        <div class="col-sm-12 col-md-4 form-group">
-            <%= form.label :Location %>
-            <%= form.text_field :Location, class:"form-control", placeholder:"11 name st, city, state" %>
-        </div>
-        <div class="col-sm-12 col-md-4 form-group custom-control custom-checkbox">
-            <%= form.check_box  :published, class:"custom-control-input" %>
-            <%= form.label :published, class:"custom-control-label" %>
-        </div>
-   
-  </div>
-   <div class="actions float-right">
-      <%= form.submit "Add Training", class:"btn btn-info"%>
+            </div>
+             <div class="form-group training-group">
+                <%= form.label :location, class:"label" %>
+                <%= form.text_field :location, class:"form-control", placeholder:"11 name st, city, state" %>
+            </div>
+            <div class="form-group training-group">
+                <%= form.label :zipcode, class:"label" %>
+                <%= form.number_field :zipcode, class:"form-control", placeholder:"123456...", autocomplete:"zipcode"%>
+            </div>
+            <div class="field btns">
+                  <button type="button" name="previous" class="btn btn-info  previous action-button">Previous</button>
+                  <button type="button" name="next" class="btn btn-info next action-button">Next</button>
+            </div>
+          </fieldset>
+          <fieldset class="step mx-auto ">
+            <div class="step-card-title">More info</div>
+            <div class=" form-group training-group">
+                <%= form.label :details, class:"label" %>
+                <%= form.text_area  :details,class:"form-control", placeholder:"we going to run 5 mph....." %>
+            </div>
+            <div class=" form-group custom-control custom-checkbox">
+                <%= form.check_box  :public, class:"custom-control-input " %>
+                <%= form.label :public, class:"custom-control-label label"%>
+            </div>
+            <div class="field btns">
+               <button type="button" name="previous" class="btn btn-info  previous action-button">Previous</button>
+                  <button type="button" name="next" class="btn btn-info next action-button">Next</button>
+           </div>
+          </fieldset>
+          <fieldset class="step mx-auto ">
+            <div class="step-card-title">Review Details:</div>
+              
+              <div class="field btns">
+                <button type="button" name="previous" class="btn btn-info  previous action-button">Previous</button>
+                <button type="submit" name="submit" class="btn btn-info  submit action-button ">Next</button>
+              </div>
+          </fieldset>
+        </form>
     </div>
+</div>
+
+
+</div>
 <% end %>
+
+<script type="text/javascript">
+    var current_fs, next_fs, previous_fs; //fieldsets
+    var left, opacity, scale; //fieldset properties which we will animate
+    var animating; //flag to prevent quick multi-click glitches
+
+    $(".next").click(function(){
+      
+      if(animating) return false;
+      animating = true;
+      current_fs = $(this).parent("fieldset");
+      next_fs = $(this).parent().next();
+      console.log(JSON.stringify(current_fs))
+      console.log(JSON.stringify(next_fs))
+
+      //activate next step on progressbar using the index of next_fs
+      $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+      
+      //show the next fieldset
+      next_fs.show(); 
+      //hide the current fieldset with style
+      $(current_fs).animate({opacity: 0}, {
+        step: function(now, mx) {
+          //as the opacity of current_fs reduces to 0 - stored in "now"
+          //1. scale current_fs down to 80%
+          scale = 1 - (1 - now) * 0.2;
+          //2. bring next_fs from the right(50%)
+          left = (now * 50)+"%";
+          //3. increase opacity of next_fs to 1 as it moves in
+          opacity = 1 - now;
+          current_fs.css({
+            'transform': 'scale('+scale+')',
+            'position': 'absolute'
+          });
+          next_fs.css({'left': left, 'opacity': opacity});
+        }, 
+        duration: 800, 
+        complete: function(){
+          current_fs.hide();
+          animating = false;
+        }, 
+        //this comes from the custom easing plugin
+        easing: 'easeInOutBack'
+      });
+    });
+
+    $(".previous").click(function(){
+      if(animating) return false;
+      animating = true;
+      
+      current_fs = $(this).parent();
+      previous_fs = $(this).parent().prev();
+      
+      //de-activate current step on progressbar
+      $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+      
+      //show the previous fieldset
+      previous_fs.show(); 
+      //hide the current fieldset with style
+      current_fs.animate({opacity: 0}, {
+        step: function(now, mx) {
+          //as the opacity of current_fs reduces to 0 - stored in "now"
+          //1. scale previous_fs from 80% to 100%
+          scale = 0.8 + (1 - now) * 0.2;
+          //2. take current_fs to the right(50%) - from 0%
+          left = ((1-now) * 50)+"%";
+          //3. increase opacity of previous_fs to 1 as it moves in
+          opacity = 1 - now;
+          current_fs.css({'left': left});
+          previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+        }, 
+        duration: 800, 
+        complete: function(){
+          current_fs.hide();
+          animating = false;
+        }, 
+        //this comes from the custom easing plugin
+        easing: 'easeInOutBack'
+      });
+    });
+
+    $(".submit").click(function(){
+      return false;
+    })
+
+</script>

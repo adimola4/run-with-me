@@ -1,4 +1,4 @@
-<div class="col-12 col-md-6">
+<div class="col-sm-12 col-md-12 col-lg-6">
   <div class="card card1" >
     <%=image_tag("/assets/images/avatar.jpg",class: "card-img1 rounded-circle", size: "16x10", alt: "avatar")%>
     <div class="card-img">
@@ -12,16 +12,12 @@
     </div>
     <div class="card-body">
     <h4 class="card-title">What we gonna do? <%= training.title%></h4>
-    <p> Where? <%= training.Location %></p>
+    <p> Where? <%= training.location %>, <%= training.zipcode %>.</p>
     <p> Duration: <%= training.duration %></p>
-    
-    
-
     <% date_diff = Date.current() - Date.parse(training.date.to_s())%>
     <% if date_diff < 0 %>
 
-        <%= link_to "Join Me 🏃🏽‍♀️", training_path(training), class: 'btn  btn-sm justify-content-center d-flex' %>
-        <%# <%= like_or_dislike_btn(post) %> 
+        <%= join_to_training(training) %> 
         </div>
         <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
             <div class="views">last modified: <%= training.created_at.strftime("%Y/%m/%d") %> 

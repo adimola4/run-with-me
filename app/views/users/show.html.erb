@@ -2,15 +2,12 @@
     <div class="row1 ">
        <%= render 'user', user: @user %>
     </div>
-    <% if current_user %>
-        <hr/>
+    
+    <% if current_user.id == @user.id %>
+   <hr/>
         <div class="row1">
-        <div class="col-md-12">
-                <h1>Upcoming :</h1>
-                    <div class="row ">
-                    <%= render 'upcoming' %>
-                    </div>
-            </div>
+          <h1 class="mx-auto">Upcoming trainings</h1>
+           <%= render 'upcoming' %>
         </div>
     <%end%>
     <hr/>

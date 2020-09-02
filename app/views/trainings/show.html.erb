@@ -18,20 +18,25 @@
   <strong>Participants:</strong>
   <%= @training.participants %>
 </p>
-
-
 <p>
   <strong>Location:</strong>
-  <%= @training.Location %>
+  <%= @training.location %>
+</p>
+<p>
+  <strong>Zipcode:</strong>
+  <%= @training.zipcode %>
 </p>
 <p>
   <strong>Status:</strong>
   <%= @training.status %>
 </p>
 <p>
-  <strong>Published:</strong>
-  <%= @training.published %>
+  <strong>Public:</strong>
+  <%= @training.public %>
 </p>
+<div class="row ">
+      <%= render @partners %>
+</div>
 
 <%= link_to 'Edit', edit_training_path(@training) %> |
 <%= link_to 'Back', trainings_path %>

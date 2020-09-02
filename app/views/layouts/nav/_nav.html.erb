@@ -1,47 +1,53 @@
 <nav class="navbar navbar-expand-lg fixed-top  bg-h-0">
- <%= link_to "🏃🏽 Run With Me 🏃🏽‍♀️", root_path, class: "navbar-brand mr-auto mr-lg-0"%>
-  <button class="navbar-toggler p-0 border-0 nav-ham" type="button" data-toggle="offcanvas">
-    <span class="navbar-toggler-icon"></span>
+  <strong>
+    <%= link_to "🏃🏽 Run With Me 🏃🏽‍♀️", root_path, class: "navbar-brand mr-auto mr-lg-0"%>
+  </strong>
+  <button class="navbar-toggler  p-0 border-0 nav-ham float-right" type="button" data-toggle="collapse" data-target="#navbarNav" >
+    <span class=""><i class="fas fa-bars"></i></span>
   </button>
+  <div class="collapse navbar-collapse o-10 text[#ff5e6c]" id="navbarNav">
+    <ul class=" navbar-nav mr-auto ul-nav" id="nav-ul">
+      
+      <%= form_tag search_trainings_path, :method => 'get' , class: 'form-inline my-1 my-sm-0 h-25 d-inline-block'  do%>
+      <%= text_field_tag :search, params[:search], class:"form-control mr-0 ml-3 h-25 ", placeholder:"Zipcode"%>
+        <%= submit_tag "search", class:"btn btn-outline-success p-1 ml-0 "%>
+      <%end%>
+    
+      </li>
 
-  <div class="navbar-collapse offcanvas-collapse open text[#ff5e6c]" id="navbarsExampleDefault">
-    <ul class="navbar-nav mr-auto ">
-      <li class="nav-item">
-        <%= link_to "Home", root_path, class: "nav-link coral-pink-text"%>
-      </li>
-      <li class="nav-item">
-        <%= link_to "About", about_path, class: "nav-link text[#ff5e6c]"%>
-      </li>
-      <li>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="ZipCode" aria-label="Search">
-        <a class="btn btn-outline-success my-2 my-sm-0" type="submit">Search partner</a>
-      </form>
-      </li>
       <% if current_user %>
-          <li class="stick-right">
-          
-         <%= image_tag current_user.gravatar_url, :class => "gravatar " %>
-         <li class="nav-item dropdown mr-auto ">
-        <a class="nav-link dropdown-toggle text[#ff5e6c]" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=current_user.name%></a>
-        <div class="dropdown-menu" aria-labelledby="dropdown01">
-        <%= link_to(current_user, html_options = {class:'dropdown-item'}) do%>
-              <strong>Profile</strong>
-          <%end%>
-          <%= link_to "Edit Profile", edit_user_registration_path, class: "dropdown-item"%>
-          <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "dropdown-item"%>
-        </div>
+       <li class="stick-right">
+       <ul class="navbar-nav ">
+          <li class="nav-item dropdown   ">
+                <a class=" dropdown-toggle text[#ff5e6c]" href="#" id="dropdown-nav" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=current_user.name%></a>
+                <ul class="dropdown-menu " aria-labelledby="dropdown-nav">
+                  <li><%= link_to(current_user, html_options = {class:'dropdown-item'}) do%>
+                      <strong>Profile</strong>
+                  <%end%></li>
+                 <li> <%= link_to "Edit Profile", edit_user_registration_path, class: "dropdown-item"%></li>
+                 <li> <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "dropdown-item"%> </li>
+                </ul>
+                <%= image_tag current_user.gravatar_url, :class => "gravatar " %>
+          </li>
+            <%# <div id="collapse-hide">
+            <li class="nav-item ">
+            <%= link_to "Add Training", new_user_session_path, class: "nav-link "%>
+        <%#  </li>%
+         </div>%>
+        </ul>
         </li>
-        </li>
+       
       <% else %>
-        <li class="nav-item">
+      <li class="nav-item">
           <%= link_to "Login", new_user_session_path, class: "nav-link"%>
         </li>
         <li class="nav-item">
           <%= link_to "Sign Up", new_user_registration_path, class: "nav-link"%>
         </li>
         <% end %>
+       
     </ul>
    
   </div>
+  
 </nav>

@@ -1,18 +1,20 @@
-<section class="container">
-<div class="row align-items-start">
-<h1>Add new training<h1>
 
-<%= render 'form', training: @training %>
-</div>
-<article class="row align-items-center">
-  <h3>
-    Recent trainings
-  </h3>
- 
-    <div class="row ">
-        <%= render @public_trainings %>
+  
+    <div class="align-items-start">
+
+    <%= render template:"trainings/new", training: @training %>
     </div>
- 
-</article>
+    <hr/>
+    <article class="row align-items-center">
+      <h3 class="mx-auto">
+        Recent trainings
+      </h3>
+    
+        <div class="row ">
+            <%= render @public_trainings %>
+        </div>
+    
+    </article>
 
-</section>
+
+

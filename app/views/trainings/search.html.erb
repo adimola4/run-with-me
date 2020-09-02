@@ -1,0 +1,19 @@
+<div>
+    <% if @results.empty? && @users_results.empty?%>
+       <% flash.now[:alert]  = "Cant find training or user for: '"+@term+"'" %>
+    <% else %>    
+            <% if @results.empty? %>
+                <% flash.now[:notice]  = "Cant find training for: '"+@term+"'"%>
+            <%else%>
+                <h1>Trainings results:"<%=@term %>"</h1>
+                <div class="row" > <%= render @results%></div>
+            <%end%>
+            <% if @users_results.empty? %>
+                <% flash.now[:notice]  = "Cant find users for: '"+@term+"'"%>
+            <%else%>
+                <h1>Users results:"<%=@term %>"</h1>
+                <div class="row" > <%= render @users_results%></div>
+            <%end%>
+     <%end%>
+
+</div>

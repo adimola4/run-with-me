@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show] 
 
   resources :trainings do 
-    resources :partners
+    resources :partners, only: [:create, :destroy]
+    get 'search', on: :collection
   end
 
   get '/about', to: 'about#index', as: 'about'

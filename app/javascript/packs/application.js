@@ -10,7 +10,18 @@ $=require ("jquery")
 $(function () {
     'use strict'
   
-    $('[data-toggle="offcanvas"]').on('click', function () {
+    $('[data-toggle="collapse"]').on('click', function () {
+      // let x = document.getElementById( "collapse-hide" )
+      // if (document.body.offsetWidth < 991.98){
+      //   if (x.style.display === "none") {
+      //     x.hidden()
+      //    // x.style.display = "block !important";
+      //   } 
+      // }else {
+      //     x.hidden()
+      //     //x.style.display = "none";
+      //   }
+      // //document.getElementById( "collapse-hide" ).append(menu_link_add);
       $('.offcanvas-collapse').toggleClass('open')
     })
     $(function () {

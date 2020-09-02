@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_25_042308) do
+ActiveRecord::Schema.define(version: 2020_08_15_154856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "partners", id: false, force: :cascade do |t|
+  create_table "partners", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "training_id"
     t.index ["training_id"], name: "index_partners_on_training_id"
@@ -29,9 +29,12 @@ ActiveRecord::Schema.define(version: 2020_07_25_042308) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "Location"
-    t.boolean "published"
+    t.string "location"
+    t.boolean "public"
     t.integer "status"
+    t.string "training_type"
+    t.string "details"
+    t.integer "zipcode"
     t.index ["user_id"], name: "index_trainings_on_user_id"
   end
 
@@ -45,6 +48,7 @@ ActiveRecord::Schema.define(version: 2020_07_25_042308) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.string "gravatar_url"
+    t.integer "zipcode"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -1,19 +1,20 @@
 module ApplicationHelper
-    def menu_link_to(link_text, link_path)
-        class_name = current_page?(link_path) ? 'menu-item active' : 'menu-item'
-    
-        content_tag(:div, class: class_name) do
-          link_to link_text, link_path
-        end
-      end
-    
-      def join_to_training(training)
-        partner = Partners.find_by(training_id: training.id, user_id: current_user.id)
+
+    def join_to_training(training)
+        partner = Partner.find_by(training_id: training.id, user_id: current_user.id)
         if partner
-          
-          link_to('More details', post_like_path)
+          unless  partner.id.nil?
+            link_to('Remove Me', training_partner_path(id: partner.id, training_id: training.id), method: :delete, class: 'btn  btn-sm justify-content-center d-flex mx-auto')
+          end
         else
-          link_to('Join', new_training_partner_path(training_id: training.id, user_id: current_user.id), method: :post)
+          link_to('Join Me 🏃🏽‍♀️', training_partners_path(training_id: training.id, ), method: :post, class: 'btn  btn-sm justify-content-center d-flex mx-auto')
         end
-      end
+    end
+  
+    def create_google_map_link(location) # TODO: Add zipcode to url
+      url="https://www.google.com/maps/search/?api=1&query="+location.to_s
+      
+      link_to(location, url , class: ' d-flex mx-auto') 
+    end
+
 end

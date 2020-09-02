@@ -1,6 +1,5 @@
-class CreatePartnersJoinTable < ActiveRecord::Migration[6.0]
+class CreateTrainingsUsersJoinTable < ActiveRecord::Migration[6.0]
   def change
-
-  create_join_table :trainigs, :users 
+      create_join_table :trainings, :users 
   end
 end

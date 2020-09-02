@@ -5,9 +5,13 @@ class User < ApplicationRecord
   gravtastic
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  validates :name, presence: true, length: { maximum: 20 }
+  validates :email, presence: true, uniqueness: { case_sensitive: false }
 
-  has_many :trainings,  dependent: :destroy
-  has_many :partners, :through => :trainings
+  has_many :trainings
+  has_many :partners, dependent: :destroy
+
+  
 
   
 

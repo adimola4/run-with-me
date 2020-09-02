@@ -1,0 +1,11 @@
+
+<div class="card col-4  card-partner ">
+            <%= link_to(@training.user, html_options = {class:'btn-link a-card-partner'}) do%>
+               <%=image_tag("/assets/images/avatar.jpg",class: "avatar-partner rounded-circle", size: "104x104", alt: "avatar")%>
+                <div class="col-md-4">
+                    <p>
+                    <h4 class="card-title partner-name-title">id:<%= partner.user_id %></h4></p>
+                    <p class="card-subtitle mb-2 text-muted ">Famous Actor</p>
+               </div>
+            <%end%>        
+ </div>
